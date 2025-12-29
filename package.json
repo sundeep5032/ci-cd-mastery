@@ -1,0 +1,21 @@
+{
+  "name": "ci-cd-mastery",
+  "version": "1.0.0",
+  "description": "![DevOps](https://img.shields.io/badge/DevOps-CI%2FCD-blueviolet) ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Primary-blue) ![Docker](https://img.shields.io/badge/Docker-Containerization-blue) ![Status](https://img.shields.io/badge/Status-Learning%20In%20Progress-orange)",
+  "main": "index.js",
+  "scripts": {
+   "build": "echo 'Building artifacts...'",
+   "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sundeep5032/ci-cd-mastery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sundeep5032/ci-cd-mastery/issues"
+  },
+  "homepage": "https://github.com/sundeep5032/ci-cd-mastery#readme"
+}
