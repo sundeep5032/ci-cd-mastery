@@ -84,5 +84,5 @@ A complete, end-to-end system featuring:
 | **Cloud** | AWS (EC2, S3, IAM) |
 | **Registry** | GitHub Packages, DockerHub |
 
---
+---
 *Created and Maintained by [sundeep]*
