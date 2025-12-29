@@ -4,7 +4,8 @@
   "description": "![DevOps](https://img.shields.io/badge/DevOps-CI%2FCD-blueviolet) ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Primary-blue) ![Docker](https://img.shields.io/badge/Docker-Containerization-blue) ![Status](https://img.shields.io/badge/Status-Learning%20In%20Progress-orange)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+   "build": "echo 'Building artifacts...'",
+   "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
