@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-         # cache: 'npm' #Requirement: Caching enabled
+          cache: 'npm' #Requirement: Caching enabled
 
       - run: npm install
 <<<<<<< HEAD
@@ -100,7 +100,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          #cache: 'npm'
+          cache: 'npm'
 
       - run: npm install
       - run: npm test
@@ -126,7 +126,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-         # cache: 'npm'
+          cache: 'npm'
 
 
       - run: npm install
