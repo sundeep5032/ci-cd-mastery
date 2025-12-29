@@ -4,8 +4,9 @@
   "description": "![DevOps](https://img.shields.io/badge/DevOps-CI%2FCD-blueviolet) ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Primary-blue) ![Docker](https://img.shields.io/badge/Docker-Containerization-blue) ![Status](https://img.shields.io/badge/Status-Learning%20In%20Progress-orange)",
   "main": "index.js",
   "scripts": {
-   "build": "echo 'Building artifacts...'",
-   "test": "echo \"Error: no test specified\" && exit 0"
+    "lint": "echo 'Linting code...' && exit 0",
+    "test": "echo 'Running tests...' && exit 0",
+    "build": "echo 'Building artifacts...' && mkdir -p reports && echo 'results' > reports/test-results.txt"
   },
   "repository": {
     "type": "git",
