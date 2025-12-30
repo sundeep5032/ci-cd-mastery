@@ -2,7 +2,6 @@ name: PR Quality Check
 
 on:
   pull_request:
-<<<<<<< HEAD
     branches: [ main ]
   push:
     branches: [ main ]
@@ -11,52 +10,25 @@ env:
   NODE_ENV: test
 
 jobs:
-=======
-    branches: [ main ] #Trigger CI on any PR targeting main
-
-jobs:
-  #1 LINT: The first line of defense
->>>>>>> 59385d3 ( feat:Add mandatory CI pipeline)
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-<<<<<<< HEAD
       - uses: actions/setup-node@v4
         with:
           node-version: 20
       - run: npm ci
       - run: npm run lint
-=======
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm' #Requirement: Caching enabled
-
-      - run: npm install
-<<<<<<< HEAD
-      - run: npm run build
->>>>>>> ee9a9fe (perf: add npm caching to speed up build and test jobs)
 
   # 2. TEST: Multi-environment verification
-=======
-      - run: npm run lint
-
-  #2 TEST: Multi-environment verification
->>>>>>> 59385d3 ( feat:Add mandatory CI pipeline)
   test:
-    needs: lint #Lint must pass first
     runs-on: ubuntu-latest
-<<<<<<< HEAD
     needs: lint # Lint must pass first
     strategy:
       matrix:
         node-version: [18, 20]
     steps:
       - uses: actions/checkout@v4
-<<<<<<< HEAD
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -86,49 +58,3 @@ jobs:
         with:
           name: build-output
           path: dist/
-=======
-=======
-    strategy:
-      matrix: #Requirement: Matrix testing
-        node-version: [18, 20, 22]
-
-    steps:
-      - uses: actions/setup-node@v4
->>>>>>> 59385d3 ( feat:Add mandatory CI pipeline)
-
-      - name: Setup Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-
-      - run: npm install
-      - run: npm test
-<<<<<<< HEAD
->>>>>>> ee9a9fe (perf: add npm caching to speed up build and test jobs)
-=======
-
-      - name: Upload Test Results # Requirement: Artifacts uploaded
-        if: always() #Upload even if tests fail
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results-node-{{ matrix.node-version }}
-          path: reports/
-
-  #3. BUILD: Final Compilation
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-
-      - run: npm install
-      - run: npm run build
->>>>>>> 59385d3 ( feat:Add mandatory CI pipeline)
