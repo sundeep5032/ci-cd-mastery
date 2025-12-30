@@ -1,65 +1,59 @@
-name: PR Quality Check
+name: CI Pipeline
 
 on:
   pull_request:
-    branches: [ main ] #Trigger CI on any PR targeting main
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+env:
+  NODE_ENV: test
 
 jobs:
-  #1 LINT: The first line of defense
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm' #Requirement: Caching enabled
-
-      - run: npm install
+      - run: npm ci
       - run: npm run lint
 
-  #2 TEST: Multi-environment verification
   test:
-    needs: lint #Lint must pass first
     runs-on: ubuntu-latest
+    needs: lint
     strategy:
-      matrix: #Requirement: Matrix testing
-        node-version: [18, 20, 22]
-
-    steps:
-      - uses: actions/setup-node@v4
-
-      - name: Setup Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-
-      - run: npm install
-      - run: npm test
-
-      - name: Upload Test Results # Requirement: Artifacts uploaded
-        if: always() #Upload even if tests fail
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results-node-{{ matrix.node-version }}
-          path: reports/
-
-  #3. BUILD: Final Compilation
-  build:
-    needs: test
-    runs-on: ubuntu-latest
+      matrix:
+        node-version: [18, 20]
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-${{ runner.os }}-
+      - run: npm ci
+      - run: npm test -- --coverage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.node-version }}
+          path: coverage/
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-
-
-      - run: npm install
+      - run: npm ci
       - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: dist/
