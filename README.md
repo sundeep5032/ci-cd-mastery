@@ -53,7 +53,7 @@ This roadmap is divided into **11 Milestone Phases**. We move from understanding
 
 ### 🧱 Phase 8 — Cloud-Aware CI/CD (AWS)
 - Deploying to EC2/S3 using IAM Roles (No static access keys).
-- Environment isolation.
+- Environment isolation
 
 ### 🧱 Phase 9 — Observability & Rollback
 - Deployment health checks and automated rollback triggers.
